@@ -7,13 +7,20 @@ using System.Threading.Tasks;
 
 namespace CarReportSystem
 {
+    [Serializable]
     class CarReport
     {
+        //登録日
         public DateTime CreatDate { get; set; }
+        //登録者
         public string Author { get; set; }
+        //メーカー
         public CarMaker Maker { get; set; }
+        //車名
         public string Name { get; set; }
+        //レポート
         public string Report { get; set; }
+        //画像
         public Image Picture { get; set; }
 
     }
