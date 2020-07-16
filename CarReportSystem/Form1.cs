@@ -19,8 +19,10 @@ namespace CarReportSystem
         public Form1()
         {
             InitializeComponent();
-            dgvItiran.DataSource = _Cars;
+            //dgvItiran.DataSource = _Cars;
         }
+
+
 
         private void btAdd_Click(object sender, EventArgs e)
         {
@@ -37,7 +39,7 @@ namespace CarReportSystem
             //BindingListへ登録
             //_Cars.Add(obj);
             _Cars.Insert(0, obj); //リストの先頭（インデックス０）へ追加
-            
+
 
             setComboBoxMaker(cbCarName.Text);
             setComboBoxAuthor(cbName.Text);
@@ -156,7 +158,7 @@ namespace CarReportSystem
             {
                 pbImage.Image = null;
             }
-            
+
         }
 
         private void btSave_Click(object sender, EventArgs e)
@@ -199,15 +201,16 @@ namespace CarReportSystem
 
         private void dgvData_Click(object sender, EventArgs e)
         {
-            if (dgvItiran.CurrentRow == null)
-                return;
+            var test = dgvItiran.CurrentRow.Cells[2].Value;
+            //if (dgvItiran.CurrentRow == null)
+            //    return;
 
             //選択したレコードを取り出す
             //データグリッドビューで選択した行のインデックスを元に
             //BindingListのデータを取得する
-            CarReport selectedCar = _Cars[dgvItiran.CurrentRow.Index];
-            inputItemAllClear();
-            dgvItiran.ClearSelection();
+            //CarReport selectedCar = _Cars[dgvItiran.CurrentRow.Index];
+            //inputItemAllClear();
+            //dgvItiran.ClearSelection();
 
         }
 
@@ -225,56 +228,37 @@ namespace CarReportSystem
 
         private void MakerCheck()
         {
-            CarReport selectedCar = _Cars[dgvItiran.CurrentRow.Index];
-            if (selectedCar.Maker == CarMaker.トヨタ)
-            {
-                rbToyota.Checked = true;
-            }
-            else if (selectedCar.Maker == CarMaker.日産)
-            {
-                rbNissan.Checked = true;
-            }
-            else if (selectedCar.Maker == CarMaker.ホンダ)
-            {
-                rbHonda.Checked = true;
-            }
-            else if (selectedCar.Maker == CarMaker.スバル)
-            {
-                rbSubaru.Checked = true;
-            }
-            else if (selectedCar.Maker == CarMaker.外車)
-            {
-                rbGaisya.Checked = true;
-            }
-            else if (selectedCar.Maker == CarMaker.その他)
-            {
-                rbSonota.Checked = true;
-            }
+            
+
+            //if (dgvItiran.Columns[3] == トヨタ)
+            //{
+            //    rbToyota.Checked = true;
+            //}
+            //else if (dgvItiran.Columns[3].Visible == 日産)
+            //{
+            //    rbNissan.Checked = true;
+            //}
+            //else if (dgvItiran.Columns[3].Visible == ホンダ)
+            //{
+            //    rbHonda.Checked = true;
+            //}
+            //else if (dgvItiran.Columns[3].Visible == スバル)
+            //{
+            //    rbSubaru.Checked = true;
+            //}
+            //else if (dgvItiran.Columns[3].Visible == 外車)
+            //{
+            //    rbGaisya.Checked = true;
+            //}
+            //else 
+            //{
+            //    rbSonota.Checked = true;
+            //}
         }
 
         private void btHirekuData_Click(object sender, EventArgs e)
         {
-            if (ofdOpenData.ShowDialog() == DialogResult.OK)
-            {
-                using (FileStream fs = new FileStream(ofdOpenData.FileName, FileMode.Open))
-                {
-                    try
-                    {
-                        BinaryFormatter formatter = new BinaryFormatter();
-                        //逆シリアル化して読み込む
-                        _Cars = (BindingList<CarReport>)formatter.Deserialize(fs);
-                        //データグリッドビューに再設定
-                        dgvItiran.DataSource = _Cars;
-                        //選択されている箇所を各コントロールへ表示
-                        dgvData_Click(sender, e);
-                    }
-                    catch (SerializationException se)
-                    {
-                        Console.WriteLine("Failed to deserialize. Reason: " + se.Message);
-                        throw;
-                    }
-                }
-            }
+            this.carReportTableAdapter.Fill(this.infosys202013DataSet.CarReport);
         }
 
         private void initButtons()
@@ -293,6 +277,11 @@ namespace CarReportSystem
 
         private void FoomRead(object sender, EventArgs e)
         {
+            // TODO: このコード行はデータを 'infosys202013DataSet.CarReport' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
+            //this.carReportTableAdapter.Fill(this.infosys202013DataSet.CarReport);
+            dgvItiran.Columns[0].Visible = false;
+
+
             if (_Cars.Count > 0)
             {
                 btSyusei.Enabled = true;
@@ -304,5 +293,105 @@ namespace CarReportSystem
                 btDelete.Enabled = false;
             }
         }
+
+        private void carReportBindingNavigatorSaveItem_Click(object sender, EventArgs e)
+        {
+            this.Validate();
+            this.carReportBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.infosys202013DataSet);
+
+        }
+
+
+
+        private void carReportBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void carReportBindingNavigator_RefreshItems(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvItiran_Click(object sender, EventArgs e)
+        {
+            //選択したレコードのインデックスで指定した項目を取り出す
+            string maker = dgvItiran.CurrentRow.Cells[3].Value.ToString();
+
+            //ラジオボタンの設定
+            setMakerRadioButton((string)maker);
+        }
+
+        private void setMakerRadioButton(string carMaker)
+        {
+            switch (carMaker)
+            {
+                case "トヨタ":
+                    rbToyota.Checked = true;
+                    break;
+
+                case "日産":
+                    rbNissan.Checked = true;
+                    break;
+
+                case "ホンダ":
+                    rbHonda.Checked = true;
+                    break;
+
+                case "スバル":
+                    rbSubaru.Checked = true;
+                    break;
+
+                case "外車":
+                    rbGaisya.Checked = true;
+                    break;
+
+                default:
+                    rbSonota.Checked = true;
+                    break;
+            }
+        }
+
+        public static Image ByteArrayToImage(byte[] byteData)
+        {
+            ImageConverter imgconv = new ImageConverter();
+            Image img = (Image)imgconv.ConvertFrom(byteData);
+            return img;
+        }
+
+        public static byte[] ImageToByteArray(Image img)
+        {
+            ImageConverter imgconv = new ImageConverter();
+            byte[] byteData = (byte[])imgconv.ConvertTo(img, typeof(byte[]));
+            return byteData;
+        }
+
+        private void dgvItiran_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void gbMaker_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dgvItiran.CurrentRow.Cells[1].Value = dtpDate.Value;
+            dgvItiran.CurrentRow.Cells[2].Value = cbName.Text;
+            //dgvItiran.CurrentRow.Cells[3].Value = setMakerRadioButton((string)maker);
+            dgvItiran.CurrentRow.Cells[4].Value = cbCarName.Text;
+            dgvItiran.CurrentRow.Cells[5].Value = tbReport.Text;
+            dgvItiran.CurrentRow.Cells[6].Value = pbImage.Image;
+        }
+
+        //CreatDate = dtpDate.Value,
+        //Author = cbName.Text,
+        //Maker = MakerSerect(),
+        //Name = cbCarName.Text,
+        //Report = tbReport.Text,
+        //Picture = pbImage.Image,
     }
 }
