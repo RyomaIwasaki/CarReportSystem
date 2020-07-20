@@ -29,16 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Label idLabel;
-            System.Windows.Forms.Label createdDateLabel;
-            System.Windows.Forms.Label authorLabel;
-            System.Windows.Forms.Label makerLabel;
-            System.Windows.Forms.Label nameLabel;
-            System.Windows.Forms.Label reportLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
-            this.carReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.infosys202013DataSet = new CarReportSystem.infosys202013DataSet();
             this.label1 = new System.Windows.Forms.Label();
             this.cbName = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -68,8 +60,6 @@
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
             this.sfdSaveData = new System.Windows.Forms.SaveFileDialog();
             this.ofdOpenData = new System.Windows.Forms.OpenFileDialog();
-            this.carReportTableAdapter = new CarReportSystem.infosys202013DataSetTableAdapters.CarReportTableAdapter();
-            this.tableAdapterManager = new CarReportSystem.infosys202013DataSetTableAdapters.TableAdapterManager();
             this.carReportBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
@@ -91,100 +81,26 @@
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.idTextBox = new System.Windows.Forms.TextBox();
-            this.createdDateDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.authorTextBox = new System.Windows.Forms.TextBox();
-            this.makerTextBox = new System.Windows.Forms.TextBox();
-            this.nameTextBox = new System.Windows.Forms.TextBox();
-            this.reportTextBox = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            idLabel = new System.Windows.Forms.Label();
-            createdDateLabel = new System.Windows.Forms.Label();
-            authorLabel = new System.Windows.Forms.Label();
-            makerLabel = new System.Windows.Forms.Label();
-            nameLabel = new System.Windows.Forms.Label();
-            reportLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.carReportBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.infosys202013DataSet)).BeginInit();
+            this.carReportBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.infosys202013DataSet = new CarReportSystem.infosys202013DataSet();
+            this.carReportTableAdapter = new CarReportSystem.infosys202013DataSetTableAdapters.CarReportTableAdapter();
+            this.tableAdapterManager = new CarReportSystem.infosys202013DataSetTableAdapters.TableAdapterManager();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.gbMaker.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.carReportBindingNavigator)).BeginInit();
             this.carReportBindingNavigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItiran)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.carReportBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.infosys202013DataSet)).BeginInit();
             this.SuspendLayout();
-            // 
-            // idLabel
-            // 
-            idLabel.AutoSize = true;
-            idLabel.Location = new System.Drawing.Point(939, 82);
-            idLabel.Name = "idLabel";
-            idLabel.Size = new System.Drawing.Size(16, 12);
-            idLabel.TabIndex = 28;
-            idLabel.Text = "id:";
-            // 
-            // createdDateLabel
-            // 
-            createdDateLabel.AutoSize = true;
-            createdDateLabel.Location = new System.Drawing.Point(939, 108);
-            createdDateLabel.Name = "createdDateLabel";
-            createdDateLabel.Size = new System.Drawing.Size(75, 12);
-            createdDateLabel.TabIndex = 30;
-            createdDateLabel.Text = "Created Date:";
-            // 
-            // authorLabel
-            // 
-            authorLabel.AutoSize = true;
-            authorLabel.Location = new System.Drawing.Point(939, 132);
-            authorLabel.Name = "authorLabel";
-            authorLabel.Size = new System.Drawing.Size(41, 12);
-            authorLabel.TabIndex = 32;
-            authorLabel.Text = "Author:";
-            // 
-            // makerLabel
-            // 
-            makerLabel.AutoSize = true;
-            makerLabel.Location = new System.Drawing.Point(939, 157);
-            makerLabel.Name = "makerLabel";
-            makerLabel.Size = new System.Drawing.Size(38, 12);
-            makerLabel.TabIndex = 34;
-            makerLabel.Text = "Maker:";
-            // 
-            // nameLabel
-            // 
-            nameLabel.AutoSize = true;
-            nameLabel.Location = new System.Drawing.Point(939, 182);
-            nameLabel.Name = "nameLabel";
-            nameLabel.Size = new System.Drawing.Size(36, 12);
-            nameLabel.TabIndex = 36;
-            nameLabel.Text = "Name:";
-            // 
-            // reportLabel
-            // 
-            reportLabel.AutoSize = true;
-            reportLabel.Location = new System.Drawing.Point(939, 207);
-            reportLabel.Name = "reportLabel";
-            reportLabel.Size = new System.Drawing.Size(41, 12);
-            reportLabel.TabIndex = 38;
-            reportLabel.Text = "Report:";
             // 
             // dtpDate
             // 
-            this.dtpDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.carReportBindingSource, "CreatedDate", true));
+            this.dtpDate.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.carReportBindingSource, "Picture", true));
             this.dtpDate.Location = new System.Drawing.Point(71, 53);
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(298, 19);
             this.dtpDate.TabIndex = 0;
-            // 
-            // carReportBindingSource
-            // 
-            this.carReportBindingSource.DataMember = "CarReport";
-            this.carReportBindingSource.DataSource = this.infosys202013DataSet;
-            this.carReportBindingSource.CurrentChanged += new System.EventHandler(this.carReportBindingSource_CurrentChanged);
-            // 
-            // infosys202013DataSet
-            // 
-            this.infosys202013DataSet.DataSetName = "infosys202013DataSet";
-            this.infosys202013DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label1
             // 
@@ -197,7 +113,6 @@
             // 
             // cbName
             // 
-            this.cbName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.carReportBindingSource, "Author", true));
             this.cbName.FormattingEnabled = true;
             this.cbName.Location = new System.Drawing.Point(71, 78);
             this.cbName.Name = "cbName";
@@ -234,7 +149,6 @@
             // rbToyota
             // 
             this.rbToyota.AutoSize = true;
-            this.rbToyota.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.carReportBindingSource, "Maker", true));
             this.rbToyota.Location = new System.Drawing.Point(6, 12);
             this.rbToyota.Name = "rbToyota";
             this.rbToyota.Size = new System.Drawing.Size(47, 16);
@@ -246,7 +160,6 @@
             // rbNissan
             // 
             this.rbNissan.AutoSize = true;
-            this.rbNissan.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.carReportBindingSource, "Maker", true));
             this.rbNissan.Location = new System.Drawing.Point(90, 12);
             this.rbNissan.Name = "rbNissan";
             this.rbNissan.Size = new System.Drawing.Size(47, 16);
@@ -258,7 +171,6 @@
             // rbHonda
             // 
             this.rbHonda.AutoSize = true;
-            this.rbHonda.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.carReportBindingSource, "Maker", true));
             this.rbHonda.Location = new System.Drawing.Point(174, 12);
             this.rbHonda.Name = "rbHonda";
             this.rbHonda.Size = new System.Drawing.Size(51, 16);
@@ -270,7 +182,6 @@
             // rbSubaru
             // 
             this.rbSubaru.AutoSize = true;
-            this.rbSubaru.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.carReportBindingSource, "Maker", true));
             this.rbSubaru.Location = new System.Drawing.Point(262, 12);
             this.rbSubaru.Name = "rbSubaru";
             this.rbSubaru.Size = new System.Drawing.Size(52, 16);
@@ -282,7 +193,6 @@
             // rbGaisya
             // 
             this.rbGaisya.AutoSize = true;
-            this.rbGaisya.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.carReportBindingSource, "Maker", true));
             this.rbGaisya.Location = new System.Drawing.Point(351, 12);
             this.rbGaisya.Name = "rbGaisya";
             this.rbGaisya.Size = new System.Drawing.Size(47, 16);
@@ -294,7 +204,6 @@
             // rbSonota
             // 
             this.rbSonota.AutoSize = true;
-            this.rbSonota.DataBindings.Add(new System.Windows.Forms.Binding("Checked", this.carReportBindingSource, "Maker", true));
             this.rbSonota.Location = new System.Drawing.Point(435, 12);
             this.rbSonota.Name = "rbSonota";
             this.rbSonota.Size = new System.Drawing.Size(54, 16);
@@ -314,7 +223,6 @@
             // 
             // cbCarName
             // 
-            this.cbCarName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.carReportBindingSource, "Name", true));
             this.cbCarName.FormattingEnabled = true;
             this.cbCarName.Location = new System.Drawing.Point(68, 153);
             this.cbCarName.Name = "cbCarName";
@@ -323,7 +231,6 @@
             // 
             // tbReport
             // 
-            this.tbReport.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.carReportBindingSource, "Report", true));
             this.tbReport.Location = new System.Drawing.Point(62, 187);
             this.tbReport.Multiline = true;
             this.tbReport.Name = "tbReport";
@@ -432,12 +339,12 @@
             // 
             this.pbImage.BackColor = System.Drawing.SystemColors.MenuText;
             this.pbImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbImage.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.carReportBindingSource, "Picture", true));
             this.pbImage.Location = new System.Drawing.Point(585, 82);
             this.pbImage.Name = "pbImage";
             this.pbImage.Size = new System.Drawing.Size(335, 273);
             this.pbImage.TabIndex = 26;
             this.pbImage.TabStop = false;
+            this.pbImage.Click += new System.EventHandler(this.pbImage_Click);
             // 
             // gbMaker
             // 
@@ -462,16 +369,6 @@
             // ofdOpenData
             // 
             this.ofdOpenData.FileName = "openFileDialog1";
-            // 
-            // carReportTableAdapter
-            // 
-            this.carReportTableAdapter.ClearBeforeFill = true;
-            // 
-            // tableAdapterManager
-            // 
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.CarReportTableAdapter = this.carReportTableAdapter;
-            this.tableAdapterManager.UpdateOrder = CarReportSystem.infosys202013DataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // carReportBindingNavigator
             // 
@@ -499,7 +396,7 @@
             this.carReportBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.carReportBindingNavigator.Name = "carReportBindingNavigator";
             this.carReportBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.carReportBindingNavigator.Size = new System.Drawing.Size(1242, 25);
+            this.carReportBindingNavigator.Size = new System.Drawing.Size(953, 25);
             this.carReportBindingNavigator.TabIndex = 28;
             this.carReportBindingNavigator.Text = "bindingNavigator1";
             this.carReportBindingNavigator.RefreshItems += new System.EventHandler(this.carReportBindingNavigator_RefreshItems);
@@ -664,82 +561,32 @@
             this.dataGridViewImageColumn1.HeaderText = "Picture";
             this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
             // 
-            // idTextBox
+            // carReportBindingSource
             // 
-            this.idTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.carReportBindingSource, "id", true));
-            this.idTextBox.Location = new System.Drawing.Point(1020, 79);
-            this.idTextBox.Name = "idTextBox";
-            this.idTextBox.Size = new System.Drawing.Size(200, 19);
-            this.idTextBox.TabIndex = 29;
+            this.carReportBindingSource.DataMember = "CarReport";
+            this.carReportBindingSource.DataSource = this.infosys202013DataSet;
+            this.carReportBindingSource.CurrentChanged += new System.EventHandler(this.carReportBindingSource_CurrentChanged);
             // 
-            // createdDateDateTimePicker
+            // infosys202013DataSet
             // 
-            this.createdDateDateTimePicker.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.carReportBindingSource, "CreatedDate", true));
-            this.createdDateDateTimePicker.Location = new System.Drawing.Point(1020, 104);
-            this.createdDateDateTimePicker.Name = "createdDateDateTimePicker";
-            this.createdDateDateTimePicker.Size = new System.Drawing.Size(200, 19);
-            this.createdDateDateTimePicker.TabIndex = 31;
+            this.infosys202013DataSet.DataSetName = "infosys202013DataSet";
+            this.infosys202013DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // authorTextBox
+            // carReportTableAdapter
             // 
-            this.authorTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.carReportBindingSource, "Author", true));
-            this.authorTextBox.Location = new System.Drawing.Point(1020, 129);
-            this.authorTextBox.Name = "authorTextBox";
-            this.authorTextBox.Size = new System.Drawing.Size(200, 19);
-            this.authorTextBox.TabIndex = 33;
+            this.carReportTableAdapter.ClearBeforeFill = true;
             // 
-            // makerTextBox
+            // tableAdapterManager
             // 
-            this.makerTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.carReportBindingSource, "Maker", true));
-            this.makerTextBox.Location = new System.Drawing.Point(1020, 154);
-            this.makerTextBox.Name = "makerTextBox";
-            this.makerTextBox.Size = new System.Drawing.Size(200, 19);
-            this.makerTextBox.TabIndex = 35;
-            // 
-            // nameTextBox
-            // 
-            this.nameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.carReportBindingSource, "Name", true));
-            this.nameTextBox.Location = new System.Drawing.Point(1020, 179);
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(200, 19);
-            this.nameTextBox.TabIndex = 37;
-            // 
-            // reportTextBox
-            // 
-            this.reportTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.carReportBindingSource, "Report", true));
-            this.reportTextBox.Location = new System.Drawing.Point(1020, 204);
-            this.reportTextBox.Name = "reportTextBox";
-            this.reportTextBox.Size = new System.Drawing.Size(200, 19);
-            this.reportTextBox.TabIndex = 39;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(81, 347);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 40;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.CarReportTableAdapter = this.carReportTableAdapter;
+            this.tableAdapterManager.UpdateOrder = CarReportSystem.infosys202013DataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1242, 703);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(idLabel);
-            this.Controls.Add(this.idTextBox);
-            this.Controls.Add(createdDateLabel);
-            this.Controls.Add(this.createdDateDateTimePicker);
-            this.Controls.Add(authorLabel);
-            this.Controls.Add(this.authorTextBox);
-            this.Controls.Add(makerLabel);
-            this.Controls.Add(this.makerTextBox);
-            this.Controls.Add(nameLabel);
-            this.Controls.Add(this.nameTextBox);
-            this.Controls.Add(reportLabel);
-            this.Controls.Add(this.reportTextBox);
+            this.ClientSize = new System.Drawing.Size(953, 703);
             this.Controls.Add(this.dgvItiran);
             this.Controls.Add(this.carReportBindingNavigator);
             this.Controls.Add(this.gbMaker);
@@ -769,8 +616,6 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.FoomRead);
             this.Click += new System.EventHandler(this.dgvData_Click);
-            ((System.ComponentModel.ISupportInitialize)(this.carReportBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.infosys202013DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.gbMaker.ResumeLayout(false);
             this.gbMaker.PerformLayout();
@@ -778,6 +623,8 @@
             this.carReportBindingNavigator.ResumeLayout(false);
             this.carReportBindingNavigator.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItiran)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.carReportBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.infosys202013DataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -840,13 +687,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
-        private System.Windows.Forms.TextBox idTextBox;
-        private System.Windows.Forms.DateTimePicker createdDateDateTimePicker;
-        private System.Windows.Forms.TextBox authorTextBox;
-        private System.Windows.Forms.TextBox makerTextBox;
-        private System.Windows.Forms.TextBox nameTextBox;
-        private System.Windows.Forms.TextBox reportTextBox;
-        private System.Windows.Forms.Button button1;
     }
 }
 

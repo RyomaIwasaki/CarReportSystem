@@ -163,54 +163,29 @@ namespace CarReportSystem
 
         private void btSave_Click(object sender, EventArgs e)
         {
-            //セーブファイルダイアログを表示
-            if (sfdSaveData.ShowDialog() == DialogResult.OK)
-            {
-                BinaryFormatter formatter = new BinaryFormatter();
-
-                //ファイルストリームを生成
-                using (FileStream fs = new FileStream(sfdSaveData.FileName, FileMode.Create))
-                {
-                    try
-                    {
-                        //シリアル化して保存
-                        formatter.Serialize(fs, _Cars);
-                    }
-                    catch (SerializationException se)
-                    {
-                        Console.WriteLine("Failed to serialize. Reason: " + se.Message);
-                        throw;
-                    }
-                }
-            }
+            
         }
 
         private void btSyusei_Click(object sender, EventArgs e)
         {
+            dgvItiran.CurrentRow.Cells[2].Value = cbName.Text;
+            dgvItiran.CurrentRow.Cells[4].Value = cbCarName.Text;
+            dgvItiran.CurrentRow.Cells[5].Value = tbReport.Text;
+            dgvItiran.CurrentRow.Cells[3].Value = getMakerRadioButton();
 
-            //変更対象のレコード（オブジェクト）
-            CarReport selectedCar = _Cars[dgvItiran.CurrentRow.Index];
-            selectedCar.CreatDate = dtpDate.Value;
-            selectedCar.Author = cbName.Text;
-            selectedCar.Maker = MakerSerect();
-            selectedCar.Report = tbReport.Text;
-            selectedCar.Picture = pbImage.Image;
+            //データベース更新（反映）
+            this.Validate();
+            this.carReportBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.infosys202013DataSet);
 
-            dgvItiran.Refresh();       //データグリッドビューの再描画
+           
         }
 
         private void dgvData_Click(object sender, EventArgs e)
         {
             var test = dgvItiran.CurrentRow.Cells[2].Value;
-            //if (dgvItiran.CurrentRow == null)
-            //    return;
-
-            //選択したレコードを取り出す
-            //データグリッドビューで選択した行のインデックスを元に
-            //BindingListのデータを取得する
-            //CarReport selectedCar = _Cars[dgvItiran.CurrentRow.Index];
-            //inputItemAllClear();
-            //dgvItiran.ClearSelection();
+            
+            
 
         }
 
@@ -282,16 +257,7 @@ namespace CarReportSystem
             dgvItiran.Columns[0].Visible = false;
 
 
-            if (_Cars.Count > 0)
-            {
-                btSyusei.Enabled = true;
-                btDelete.Enabled = true;
-            }
-            else
-            {
-                btSyusei.Enabled = false;
-                btDelete.Enabled = false;
-            }
+            
         }
 
         private void carReportBindingNavigatorSaveItem_Click(object sender, EventArgs e)
@@ -319,8 +285,15 @@ namespace CarReportSystem
             //選択したレコードのインデックスで指定した項目を取り出す
             string maker = dgvItiran.CurrentRow.Cells[3].Value.ToString();
 
+            dtpDate.Value = (DateTime)dgvItiran.CurrentRow.Cells[1].Value;
+            cbName.Text = dgvItiran.CurrentRow.Cells[2].Value.ToString();
+            cbCarName.Text = dgvItiran.CurrentRow.Cells[4].Value.ToString();
+            tbReport.Text = dgvItiran.CurrentRow.Cells[5].Value.ToString();
+            
+
             //ラジオボタンの設定
             setMakerRadioButton((string)maker);
+            
         }
 
         private void setMakerRadioButton(string carMaker)
@@ -347,7 +320,7 @@ namespace CarReportSystem
                     rbGaisya.Checked = true;
                     break;
 
-                default:
+                case "その他":
                     rbSonota.Checked = true;
                     break;
             }
@@ -387,11 +360,37 @@ namespace CarReportSystem
             dgvItiran.CurrentRow.Cells[6].Value = pbImage.Image;
         }
 
-        //CreatDate = dtpDate.Value,
-        //Author = cbName.Text,
-        //Maker = MakerSerect(),
-        //Name = cbCarName.Text,
-        //Report = tbReport.Text,
-        //Picture = pbImage.Image,
+        private void pbImage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private string getMakerRadioButton()
+        {
+            if (rbToyota.Checked)
+            {
+                return rbToyota.Text;
+            }
+            else if (rbNissan.Checked)
+            {
+                return rbNissan.Text;
+            }
+            else if (rbSubaru.Checked)
+            {
+                return rbSubaru.Text;
+            }
+            else if (rbGaisya.Checked)
+            {
+                return rbGaisya.Text;
+            }
+            else if (rbSonota.Checked)
+            {
+                return rbSonota.Text;
+            }
+            else
+            {
+                return "null";
+            }
+        }
     }
 }
