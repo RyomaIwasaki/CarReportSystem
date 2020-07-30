@@ -163,29 +163,43 @@ namespace CarReportSystem
 
         private void btSave_Click(object sender, EventArgs e)
         {
-            
+
         }
 
+        //修正ボタン
         private void btSyusei_Click(object sender, EventArgs e)
         {
+            dgvItiran.CurrentRow.Cells[1].Value = dtpDate.Value;
             dgvItiran.CurrentRow.Cells[2].Value = cbName.Text;
+            dgvItiran.CurrentRow.Cells[3].Value = getMakerRadioButton();
             dgvItiran.CurrentRow.Cells[4].Value = cbCarName.Text;
             dgvItiran.CurrentRow.Cells[5].Value = tbReport.Text;
-            dgvItiran.CurrentRow.Cells[3].Value = getMakerRadioButton();
+
+            if (pbImage.Image != null)
+            {
+                dgvItiran.CurrentRow.Cells[6].Value = ImageToByteArray(pbImage.Image);
+            }
+            else
+            {
+                dgvItiran.CurrentRow.Cells[6].Value = null;
+            }
+
 
             //データベース更新（反映）
             this.Validate();
             this.carReportBindingSource.EndEdit();
             this.tableAdapterManager.UpdateAll(this.infosys202013DataSet);
 
-           
+            inputItemAllClear();
+
+
         }
 
         private void dgvData_Click(object sender, EventArgs e)
         {
             var test = dgvItiran.CurrentRow.Cells[2].Value;
-            
-            
+
+
 
         }
 
@@ -203,7 +217,7 @@ namespace CarReportSystem
 
         private void MakerCheck()
         {
-            
+
 
             //if (dgvItiran.Columns[3] == トヨタ)
             //{
@@ -231,6 +245,7 @@ namespace CarReportSystem
             //}
         }
 
+        //接続ボタン
         private void btHirekuData_Click(object sender, EventArgs e)
         {
             this.carReportTableAdapter.Fill(this.infosys202013DataSet.CarReport);
@@ -257,7 +272,7 @@ namespace CarReportSystem
             dgvItiran.Columns[0].Visible = false;
 
 
-            
+
         }
 
         private void carReportBindingNavigatorSaveItem_Click(object sender, EventArgs e)
@@ -280,6 +295,7 @@ namespace CarReportSystem
 
         }
 
+        //一覧表のデータ選択
         private void dgvItiran_Click(object sender, EventArgs e)
         {
             //選択したレコードのインデックスで指定した項目を取り出す
@@ -289,11 +305,19 @@ namespace CarReportSystem
             cbName.Text = dgvItiran.CurrentRow.Cells[2].Value.ToString();
             cbCarName.Text = dgvItiran.CurrentRow.Cells[4].Value.ToString();
             tbReport.Text = dgvItiran.CurrentRow.Cells[5].Value.ToString();
-            
+
+            try
+            {
+                pbImage.Image = ByteArrayToImage((byte[])dgvItiran.CurrentRow.Cells[6].Value);
+            }
+            catch (Exception ex)
+            {
+
+            }
 
             //ラジオボタンの設定
             setMakerRadioButton((string)maker);
-            
+
         }
 
         private void setMakerRadioButton(string carMaker)
@@ -326,6 +350,7 @@ namespace CarReportSystem
             }
         }
 
+        // バイト配列をImageオブジェクトに変換
         public static Image ByteArrayToImage(byte[] byteData)
         {
             ImageConverter imgconv = new ImageConverter();
@@ -333,6 +358,7 @@ namespace CarReportSystem
             return img;
         }
 
+        // Imageオブジェクトをバイト配列に変換
         public static byte[] ImageToByteArray(Image img)
         {
             ImageConverter imgconv = new ImageConverter();
@@ -375,6 +401,10 @@ namespace CarReportSystem
             {
                 return rbNissan.Text;
             }
+            else if (rbHonda.Checked)
+            {
+                return rbHonda.Text;
+            }
             else if (rbSubaru.Checked)
             {
                 return rbSubaru.Text;
@@ -391,6 +421,18 @@ namespace CarReportSystem
             {
                 return "null";
             }
+        }
+
+        private void btSeachExe_Click(object sender, EventArgs e)
+        {
+
+            this.carReportTableAdapter.FillByCarName(this.infosys202013DataSet.CarReport, tbSearchCarName.Text, tbSearchMaker.Text);
+
+            this.carReportTableAdapter.FillByCarName(this.infosys202013DataSet.CarReport, tbSearchCarName.Text, tbSearchMaker.Text);
+
+
+            this.carReportTableAdapter.FillByCarDate(this.infosys202013DataSet.CarReport, dtbSearchDate.Value.ToString());
+
         }
     }
 }
